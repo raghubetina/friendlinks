@@ -5,15 +5,6 @@
   <%= @user.username %>
 </p>
 
-<p>
-  <b>Password digest:</b>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <b>Facebook access token:</b>
-  <%= @user.facebook_access_token %>
-</p>
 
 
 <%= link_to 'Edit', edit_user_path(@user) %> |

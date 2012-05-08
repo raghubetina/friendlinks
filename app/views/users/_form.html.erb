@@ -16,12 +16,12 @@
     <%= f.text_field :username %>
   </div>
   <div class="field">
-    <%= f.label :password_digest %><br />
-    <%= f.text_field :password_digest %>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
   </div>
-  <div class="field">
-    <%= f.label :facebook_access_token %><br />
-    <%= f.text_field :facebook_access_token %>
+	<div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
   </div>
   <div class="actions">
     <%= f.submit %>

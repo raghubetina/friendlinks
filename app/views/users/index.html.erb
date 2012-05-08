@@ -3,8 +3,6 @@
 <table>
   <tr>
     <th>Username</th>
-    <th>Password digest</th>
-    <th>Facebook access token</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,8 +11,6 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.username %></td>
-    <td><%= user.password_digest %></td>
-    <td><%= user.facebook_access_token %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
