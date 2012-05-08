@@ -1,4 +1,30 @@
+require 'open-uri'
+
 class UsersController < ApplicationController
+
+  before_filter :authorized?, :except => [:index, :new, :create]
+  
+  def authorized?
+    if params[:id]
+      @user = User.find(params[:id])
+      unless current_user == @user
+        redirect_to root_url, :notice => "Unauthorized."
+      end
+    end
+  end
+
+  def facebook_callback
+    if code = params[:code]
+      response = open("https://graph.facebook.com/oauth/access_token?client_id=228982437214493&redirect_uri=http://localhost:3000/facebook_callback&client_secret=fae5bcd4f2f737826c43f4cc02e00651&code=#{code}").read
+      access_token = response.split("&")[0].split("=")[1]
+      current_user.facebook_access_token = access_token
+      current_user.save
+      redirect_to user_url(current_user), :notice => "Facebook access granted."
+    else
+      redirect_to root_url, :notice => "Facebook access not granted."
+    end
+  end  
+  
   # GET /users
   # GET /users.json
   def index
@@ -44,6 +70,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else

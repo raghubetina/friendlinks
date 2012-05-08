@@ -1,5 +1,7 @@
 FriendLinks::Application.routes.draw do
   
+  get 'facebook_callback', :controller => 'users', :action => "facebook_callback"
+  
   post 'sessions/create'
   get 'sessions/destroy'
 

@@ -3,7 +3,8 @@
   <%= @user.username %>
 </p>
 
-
+<%= link_to 'Authorize Facebook Access', "https://www.facebook.com/dialog/oauth?
+     client_id=228982437214493&redirect_uri=http://localhost:3000/facebook_callback&scope=read_stream" %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
