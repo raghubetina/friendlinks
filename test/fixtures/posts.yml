@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  graph_id: MyString
+  from_name: MyString
+  from_id: MyString
+  message: MyText
+  picture: MyString
+  link: MyString
+  name: MyString
+  description: MyText
+  icon: MyString
+  shared_at: 2012-05-08 01:44:29
+
+two:
+  graph_id: MyString
+  from_name: MyString
+  from_id: MyString
+  message: MyText
+  picture: MyString
+  link: MyString
+  name: MyString
+  description: MyText
+  icon: MyString
+  shared_at: 2012-05-08 01:44:29

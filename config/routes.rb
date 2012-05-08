@@ -1,5 +1,9 @@
 FriendLinks::Application.routes.draw do
   
+  get 'users/backfill'
+  
+  get "posts/create"
+
   get 'facebook_callback', :controller => 'users', :action => "facebook_callback"
   
   post 'sessions/create'

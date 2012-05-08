@@ -23,7 +23,32 @@ class UsersController < ApplicationController
     else
       redirect_to root_url, :notice => "Facebook access not granted."
     end
-  end  
+  end
+  
+  def backfill
+    @user = current_user
+    friends = JSON.parse(open("https://graph.facebook.com/me/friends?access_token=#{@user.facebook_access_token}").read)["data"]
+    
+    friends.each do |friend|
+      links = JSON.parse(open("https://graph.facebook.com/#{friend["id"]}/links?access_token=#{@user.facebook_access_token}").read)["data"]
+      links.each do |link|
+        p = Post.new
+        p.user_id = @user.id
+        p.graph_id = link["id"]
+        p.from_name = link["from"]["name"]
+        p.from_id = link["from"]["id"]
+        p.message = link["message"]
+        p.picture = link["picture"]
+        p.link = link["link"]
+        p.name = link["name"]
+        p.description = link["description"]
+        p.icon = link["icon"]
+        p.shared_at = link["created_time"]
+        
+        p.save
+      end
+    end
+  end
   
   # GET /users
   # GET /users.json
@@ -64,6 +89,8 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    @user = User.new(params[:user])
+    
     respond_to do |format|
       if @user.save
         session[:user_id] = @user.id

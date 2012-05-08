@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120508054757) do
+ActiveRecord::Schema.define(:version => 20120508065151) do
+
+  create_table "posts", :force => true do |t|
+    t.string   "graph_id"
+    t.string   "from_name"
+    t.string   "from_id"
+    t.text     "message"
+    t.string   "picture"
+    t.string   "link"
+    t.string   "name"
+    t.text     "description"
+    t.string   "icon"
+    t.datetime "shared_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "user_id"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "username"

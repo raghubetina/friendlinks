@@ -4,7 +4,23 @@
 </p>
 
 <%= link_to 'Authorize Facebook Access', "https://www.facebook.com/dialog/oauth?
-     client_id=228982437214493&redirect_uri=http://localhost:3000/facebook_callback&scope=read_stream" %>
-
+     client_id=228982437214493&redirect_uri=http://localhost:3000/facebook_callback&scope=read_stream" %> |
+<%= link_to "Fetch Friends' Links", "/users/backfill" %> |
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+
+
+<table>
+	<tr>
+		<th>Friend</th>
+		<th>Link</th>
+		<th>Message</th>
+	</tr>
+<% @user.posts.sort_by(&:shared_at).each do |post| %>
+	<tr>
+		<td><%= post.from_name %></td>
+		<td><%= link_to post.name, post.link %></td>
+		<td><%= post.message %></td>
+	</tr>
+<% end %>
+</table>
