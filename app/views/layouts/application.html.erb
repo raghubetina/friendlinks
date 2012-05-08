@@ -7,8 +7,20 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+	<% if logged_in? %>
+		<p>Signed in as <%= current_user.username %>. <%= link_to 'Sign out', '../sessions/destroy' %></p>
+	<% else %>
+		<%= form_tag '../sessions/create' do %>
+			<p>
+		    <%= label_tag :username %> <%= text_field_tag :username %>
+		    <%= label_tag :password %> <%= password_field_tag :password %>
+				<%= submit_tag 'Sign In' %>
+			</p>
+		<% end %>
+	<% end %>
+	<p id="notice"><%= notice %></p>
+		
+	<%= yield %>
 
 </body>
 </html>

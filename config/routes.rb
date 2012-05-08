@@ -1,4 +1,8 @@
 FriendLinks::Application.routes.draw do
+  
+  post 'sessions/create'
+  get 'sessions/destroy'
+
   root :to => 'users#index'
   
   resources :users
